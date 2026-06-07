@@ -145,7 +145,7 @@ class ProspeoService:
         url = f"{self._config.prospeo_base_url}/search-person"
         payload: dict[str, Any] = {
             "filters": {
-                "company": [domain],
+                "company": domain,
                 "person_seniority": _TARGET_SENIORITY,
             },
             "page": 1,
