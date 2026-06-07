@@ -169,6 +169,16 @@ class ProspeoService:
             response.status_code,
             response.text[:400],
         )
+
+        if response.status_code == 400:
+            try:
+                err_data = response.json()
+                if err_data.get("error_code") == "NO_RESULTS":
+                    logger.debug("ProspeoService: NO_RESULTS returned for domain %s.", domain)
+                    return []
+            except ValueError:
+                pass
+
         self._raise_for_status(response)
 
         try:
